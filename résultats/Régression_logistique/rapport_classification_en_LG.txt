@@ -1,0 +1,11 @@
+              precision    recall  f1-score   support
+
+        ELDR       0.75      0.28      0.41      1339
+     GUE-NGL       0.77      0.60      0.67      1792
+      PPE-DE       0.58      0.81      0.68      4570
+         PSE       0.58      0.61      0.60      3627
+   Verts-ALE       0.69      0.34      0.46      1585
+
+    accuracy                           0.61     12913
+   macro avg       0.67      0.53      0.56     12913
+weighted avg       0.64      0.61      0.60     12913
