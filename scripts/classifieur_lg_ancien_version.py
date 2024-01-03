@@ -9,34 +9,35 @@ import seaborn as sns
 
 chemin_dossier_données_prétraitées='./corpus/corpus_prétraité/'
 
-# Supposons que 'texts' et 'labels' sont les données prétraitées et les étiquettes de parti politique
+# 'texts' et 'labels' sont les données prétraitées et les étiquettes de parti politique
 texts = []  # Les textes prétraités
 labels = [] # Les étiquettes
 
 for fichier in os.listdir(chemin_dossier_données_prétraitées):
     if fichier.endswith('.csv'):
         chemin_complet = os.path.join(chemin_dossier_données_prétraitées, fichier)
+        print(f"Chargement du fichier {chemin_complet}...")
         # Lire le contenu du fichier CSV
         df = pd.read_csv(chemin_complet)
 
         # Assurez-vous que les colonnes 'text' et 'parti' existent
-        if 'text' in df.columns and 'parti' in df.columns:
+        if 'Text' in df.columns and 'Label' in df.columns:
             # Remplacer les NaN par des chaînes vides dans la colonne 'text'
-            df['text'] = df['text'].fillna('')
+            df['text'] = df['Text'].fillna('')
 
-            texts.extend(df['text'].tolist())
-            labels.extend(df['parti'].tolist())
+            texts.extend(df['Text'].tolist())
+            labels.extend(df['Label'].tolist())
 
-# Vectorisation
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(texts)
+    # Vectorisation
+    vectorizer = TfidfVectorizer()
+    X = vectorizer.fit_transform(texts)
 
-# Séparation des données
-X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.2, random_state=42)
+    # Séparation des données
+    X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.2, random_state=42)
 
-# Choix et entraînement du modèle
-model = LogisticRegression()
-model.fit(X_train, y_train)
+    # Choix et entraînement du modèle
+    model = LogisticRegression()
+    model.fit(X_train, y_train)
 
 ######### Évaluation du modèle ##########
 # Prédiction sur l'ensemble de test

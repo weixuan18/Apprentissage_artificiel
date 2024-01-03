@@ -32,8 +32,8 @@ def preprocess_text(text, lang):
     return cleaned_text
 
 
-# Dossier contenant les fichiers CSV
-directory = "./corpus/corpus_extraits/"
+# Dossier contenant les fichiers CSV (à modifier)
+directory = "./corpus/corpus_extraits/test/"
 
 # Itérer sur tous les fichiers CSV dans le dossier
 for filename in os.listdir(directory):
@@ -44,10 +44,10 @@ for filename in os.listdir(directory):
         df = pd.read_csv(file_path)
 
         # Détecter la langue du premier texte non vide dans le fichier
-        lang = detect(next(text for text in df['text'] if text.strip()))
+        lang = detect(next(text for text in df['Text'] if text.strip()))
 
         # Prétraiter chaque texte dans la colonne 'text'
-        df['text_cleaned'] = df['text'].apply(lambda x: preprocess_text(x, lang))
+        df['text_cleaned'] = df['Text'].apply(lambda x: preprocess_text(x, lang))
 
-        # Sauvegarder le DataFrame prétraité
-        df.to_csv(os.path.join(directory, f"pretraite_{lang}_{filename}"), index=False)
+        # Sauvegarder le DataFrame prétraité (à modifier)
+        df.to_csv(os.path.join(directory, f"prétraite_test_{lang}.csv"), index=False)
